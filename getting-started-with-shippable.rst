@@ -27,7 +27,7 @@ This tutorial assumes that you have:
 
 Prepare your app
 ----------------
-We have created a sample `Ruby on Rails application <https://github.com/bsdnoobz/rails-sample-app>`_ on Github for this guide. First you need to `fork <https://help.github.com/articles/fork-a-repo/>`_ the sample code to your Github account then create a clone of your fork locally on your computer.
+We have created a sample `Ruby on Rails application <https://github.com/bsdnoobz/rails-sample-app>`_ on Github for this guide. First you need to `fork the sample code <https://help.github.com/articles/fork-a-repo/>`_ to your Github account and then create a clone to work locally on your computer.
 
 ::
 

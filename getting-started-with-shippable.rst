@@ -37,9 +37,7 @@ We have created a sample `Ruby on Rails application <https://github.com/bsdnoobz
 
 We will assume that the repository is in the ``~/rails-sample-app`` directory.
 
-The app is a simple Ruby on Rails project which was generated using the `rails generate scaffold` command. Before doing something with the app, take a look and play around with the app on your computer first. Run the following commands from your terminal:
-
-::
+The app is a simple Ruby on Rails project which was generated using the `rails generate scaffold` command. Before doing something with the app, take a look and play around with the app on your computer first. Run the following commands from your terminal::
 
     $ cd ~/rails-sample-app
     $ bundle install --without production
@@ -57,12 +55,47 @@ Change to the sample app's directory and create a remote repository::
 
     $ cd ~/rails-sample-app
     $ heroku create
+    Creating fathomless-ocean-2995... done, stack is cedar
+    https://fathomless-ocean-2995.herokuapp.com/ | git@heroku.com:fathomless-ocean-2995.git
+    Git remote heroku added
 
-The command ``heroku create`` will creates a remote repository (called ``heroku``) which it configures in your local git repo. It also set a random name for your app (in this case HEROKU_APP_NAME) and the URL to access your app (HEROKU_APP_URL). Note that the name will be different on your computer.
+The command ``heroku create`` will creates a remote repository (called ``heroku``) which it configures in your local git repo. It also set a random name for your app (in this case ``fathomless-ocean-2995``) and the URL to access your app (``https://fathomless-ocean-2995.herokuapp.com/``). Note that the name will be different on your computer.
 
 Deploy the app::
 
     $ git push heroku master
+    Initializing repository, done.
+    Counting objects: 117, done.
+    Delta compression using up to 4 threads.
+    Compressing objects: 100% (91/91), done.
+    Writing objects: 100% (117/117), 23.30 KiB | 0 bytes/s, done.
+    Total 117 (delta 19), reused 117 (delta 19)
+
+    -----> Ruby app detected
+    -----> Compiling Ruby/Rails
+    -----> Using Ruby version: ruby-2.0.0
+    -----> Installing dependencies using 1.6.3
+           Running: bundle install --without development:test --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment
+           Fetching gem metadata from https://rubygems.org/..........
+           Installing rake 10.3.2
+           ...
+           Bundle completed (31.10s)
+           Cleaning up the bundler cache.
+    -----> Preparing app for Rails asset pipeline
+           Running: rake assets:precompile
+           Asset precompilation completed (7.28s)
+           Cleaning assets
+           Running: rake assets:clean
+           ...
+    -----> Discovering process types
+           Procfile declares types -> web
+           Default types for Ruby  -> console, rake, worker
+    -----> Compressing... done, 22.5MB
+    -----> Launching... done, v6
+           https://fathomless-ocean-2995.herokuapp.com/ deployed to Heroku
+
+    To git@heroku.com:fathomless-ocean-2995.git
+     * [new branch]      master -> master
 
 Visit your app by typing the app's URL from your browser.
 

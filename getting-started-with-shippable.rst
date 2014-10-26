@@ -149,4 +149,8 @@ Add this file to the repository::
     $ git commit -m "added shippable.yml"
     $ git push origin master
 
-The file ``shippable.yml`` contains the configuration needed by **Shippable**. For more information about this file and the available options, refer to `Shippable Configuration File <http://www.shippable.com>`_ reference.
+The file ``shippable.yml`` contains the configuration needed by **Shippable**. For more information about this file and the available options, refer to `Shippable Configuration File Reference<http://www.shippable.com>`_.
+
+Open ``http://www.shippable.com`` and click the Github button to log in using your Github account. It will display your dashboard below.
+
+.. image:: images/shippable-dashboard.png

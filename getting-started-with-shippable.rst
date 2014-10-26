@@ -4,20 +4,20 @@ Getting Started with Shippable
 Introduction
 ------------
 
-Shippable is a SaaS platform that lets you easily add Continuous Integration/Deployment to your Github and BitButcket (git) repositories. It is lightweight, super simple to setup, and runs your builds and tests faster than any other service. After building and teting your code, you can deploy it to any PaaS provider like Heroku & OpenShift and also to VMs, bare metal, OpenStack clusters, or any major infrastructure provider.
+**Shippable** is a SaaS platform that lets you easily add Continuous Integration/Deployment to your Github and BitButcket (git) repositories. It is lightweight, super simple to setup, and runs your builds and tests faster than any other service. After building and teting your code, you can deploy it to any PaaS provider like Heroku & OpenShift and also to VMs, bare metal, OpenStack clusters, or any major infrastructure provider.
 
-Shippable uses **Build Minions** which is docker based containers to run your workloads. Docker is the fastest growing Linux container solution and this will light up some cool scenarios like portability and versioning in the coming weeks.
+**Shippable** uses **Build Minions** which is docker based containers to run your workloads. Docker is the fastest growing Linux container solution and this will light up some cool scenarios like portability and versioning in the coming weeks.
 
-Shippable supports many popular languages such as Ruby, Python, Node.js, and others. We also support services which are commonly used in your applications like MySQL, PostgreSQL, Elastic Search, and others.
+**Shippable** supports many popular languages such as Ruby, Python, Node.js, and others. We also support services which are commonly used in your applications like MySQL, PostgreSQL, Elastic Search, and others.
 
-Common use cases for Shippable include:
+Common use cases for **Shippable** include:
 
 - Automating the packaging and deployment of web applications.
 - Automated testing and continuous integration/deployment.
 
-.. note:: Shippable is 100% free to use, even for private repositories.
+.. note:: **Shippable** is 100% free to use, even for private repositories.
 
-In this guide, you will learn how to use Shippable for automated testing and then deploy your web application to Heroku if the tests are passed. We will be using Ruby on Rails app in this guide, but you can easily use this guide for other frameworks/languanges as well.
+In this guide, you will learn how to use **Shippable** for automated testing and then deploy your web application to Heroku if the tests are passed. We will be using Ruby on Rails app in this guide, but you can easily use this guide for other frameworks/languanges as well.
 
 This tutorial assumes that you have:
 
@@ -97,6 +97,56 @@ Deploy the app::
     To git@heroku.com:fathomless-ocean-2995.git
      * [new branch]      master -> master
 
-Visit your app by typing the app's URL from your browser.
+Run pending migrations on Heroku::
 
-Take a note of the remote repository name on Heroku. We will need this later for deploying the app from Shippable.
+    $ heroku run rake db:migrate
+    Running `rake db:migrate` attached to terminal... up, run.6103
+    Migrating to CreateProducts (20141026102828)
+    == 20141026102828 CreateProducts: migrating ===================================
+    -- create_table(:products)
+       -> 0.6569s
+    == 20141026102828 CreateProducts: migrated (0.6570s) ==========================
+
+Now you can visit your app by typing the app's URL from your browser.
+
+Take a note of the remote repository name on Heroku. We will need this later for deploying the app from **Shippable**.
+
+Attach your Github repository to Shippable
+------------------------------------------
+
+In this step you will attach your sample app's Github repository to **Shippable**.
+
+Create a new file called ``shippable.yml`` in the root directory of the sample app with the following contents::
+
+    # The operating system for our build minion
+    build_environment: Ubuntu 12.04
+
+    # The programming language being used
+    language: ruby
+
+    # Use RVM and Ruby 2.1.2
+    rvm:
+      - 2.1.2
+
+    # Set the environment variables
+    env:
+      - CI_REPORTS=shippable/testresults COVERAGE_REPORTS=shippable/codecoverage
+
+    # Prepare the things needed before executing the unit tests
+    before_script:
+      - bundle install
+      - mkdir -p shippable/testresults
+      - mkdir -p shippable/codecoverage
+      - rake db:migrate
+
+    # The command for executing the unit test
+    script:
+      - rake test
+
+The file ``shippable.yml`` contains the configuration needed by **Shippable**. For more information about this file and the available options, refer to `Shippable Configuration File <http://www.shippable.com>`_ reference.
+
+Add this file to the repository::
+
+    $ git add .
+    $ git commit -m "added shippable.yml"
+    $ git push origin master

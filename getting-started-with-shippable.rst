@@ -58,14 +58,12 @@ Change to the sample app's directory and create a remote repository::
     $ cd ~/rails-sample-app
     $ heroku create
 
-The command ``heroku create`` will creates a remote repository (called ``heroku``) which it configures in your local git repo. It also set a random name for your app: HEROKU_APP_NAME.
+The command ``heroku create`` will creates a remote repository (called ``heroku``) which it configures in your local git repo. It also set a random name for your app (in this case HEROKU_APP_NAME) and the URL to access your app (HEROKU_APP_URL). Note that the name will be different on your computer.
 
 Deploy the app::
 
     $ git push heroku master
 
-Visit the app by typing::
-
-    $ heroku open
+Visit your app by typing the app's URL from your browser.
 
 Take a note of the remote repository name on Heroku. We will need this later for deploying the app from Shippable.

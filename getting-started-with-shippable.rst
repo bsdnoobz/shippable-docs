@@ -24,3 +24,17 @@ This tutorial assumes that you have:
 - A free `Shippable account <http://www.shippable.com>`_.
 - A free `Heroku account <https://signup.heroku.com/signup/dc>`_.
 - Ruby on Rails installed your system.
+
+Prepare your app
+----------------
+We have created a sample `Ruby on Rails application <https://github.com/bsdnoobz/rails-sample-app>`_ on Github for this guide. First you need to `fork <https://help.github.com/articles/fork-a-repo/>`_ the sample code to your Github account then create a clone of your fork locally on your computer.
+
+    git clone git@github.com:YOUR-USERNAME/rails-sample-app.git
+
+The app is a simple Ruby on Rails project which was generated using the `rails generate scaffold` command. Before doing something with the app, take a look and play around with the app on your computer first. Run the following commands from your terminal:
+
+    bundle install --without production
+    rake db:migrate
+    rails server
+
+Access the app by opening `http://localhost:3000` from your browser.

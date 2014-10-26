@@ -37,6 +37,7 @@ The app is a simple Ruby on Rails project which was generated using the `rails g
 
 ::
 
+    cd rails-sample-app
     bundle install --without production
     rake db:migrate
     rails server

@@ -41,4 +41,4 @@ The app is a simple Ruby on Rails project which was generated using the `rails g
     rake db:migrate
     rails server
 
-Access the app by opening `http://localhost:3000` from your browser.
+Access the app by opening ``http://localhost:3000`` from your browser.

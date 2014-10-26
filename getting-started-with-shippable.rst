@@ -116,7 +116,7 @@ Attach your Github repository to Shippable
 
 In this step you will attach your sample app's Github repository to **Shippable**.
 
-Create a new file called ``shippable.yml`` in the root directory of the sample app with the following contents::
+Create a new file called ``shippable.yml`` in the root directory of your app with the following contents::
 
     # The operating system for our build minion
     build_environment: Ubuntu 12.04
@@ -143,10 +143,10 @@ Create a new file called ``shippable.yml`` in the root directory of the sample a
     script:
       - rake test
 
-The file ``shippable.yml`` contains the configuration needed by **Shippable**. For more information about this file and the available options, refer to `Shippable Configuration File <http://www.shippable.com>`_ reference.
-
 Add this file to the repository::
 
     $ git add .
     $ git commit -m "added shippable.yml"
     $ git push origin master
+
+The file ``shippable.yml`` contains the configuration needed by **Shippable**. For more information about this file and the available options, refer to `Shippable Configuration File <http://www.shippable.com>`_ reference.

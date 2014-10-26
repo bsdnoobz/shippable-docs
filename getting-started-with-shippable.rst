@@ -42,6 +42,7 @@ The app is a simple Ruby on Rails project which was generated using the `rails g
     $ cd ~/rails-sample-app
     $ bundle install --without production
     $ rake db:migrate
+    $ rake test
     $ rails server
 
 Visit the app by opening ``http://localhost:3000`` from your browser.
@@ -154,3 +155,13 @@ The file ``shippable.yml`` contains the configuration needed by **Shippable**. F
 Open ``http://www.shippable.com`` and click the Github button to log in using your Github account. It will display your dashboard below.
 
 .. image:: images/shippable-dashboard.png
+
+Click your Github name below "Organizations" on the right sidebar. Your dashboard will display the list of your Github repos and some other things. From this repo list, scroll down until you find your app and click the **Enable** button. Your app will be listed in the **Projects** table. Click your app's name in this table to open the **Project Builds** page.
+
+Manually run the build by clicking the arrow button on the top. It will ask what branch to build, select "master" and click **Run**. Please wait while **Shippable** builds your app.
+
+When it finished, you should see that **Shippable** successfully build the app and all of the tests are passed.
+
+.. image:: images/shippable-build-success.png
+
+On the bottom of the page, you can see the console log of your minion, as well as the test and code coverage visualization.

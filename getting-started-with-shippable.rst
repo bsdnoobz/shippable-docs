@@ -9,8 +9,8 @@ Shippable uses **Build Minions** which is docker based containers to run your wo
 
 Common use cases for Shippable include:
 
-- Automating the packaging and deployment of web applications.
-- Automated testing and continuous integration/deployment.
+ - Automating the packaging and deployment of web applications.
+ - Automated testing and continuous integration/deployment.
 
     **Note:**
     Shippable is 100% free to use, even for private repositories.

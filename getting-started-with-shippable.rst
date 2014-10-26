@@ -46,21 +46,26 @@ The app is a simple Ruby on Rails project which was generated using the `rails g
     $ rake db:migrate
     $ rails server
 
-Now you can access the app by opening ``http://localhost:3000`` from your browser.
+Visit the app by opening ``http://localhost:3000`` from your browser.
 
 Create remote repository on Heroku
 ----------------------------------
 
-In this step you will create a remote repository on Heroku (i.e. deploy the app).
+In this step you will create a remote repository on Heroku (i.e. deploy the app) using `Heroku toolbelt <https://toolbelt.heroku.com/>`_. Please download and install the tool if you haven't installed it on your computer. Refer to the documentation for the detailed explanation on how to use the tool.
 
-To deploy the app, you need to install `Heroku toolbelt <https://toolbelt.heroku.com/>`_. Refer to the Heroku Toolbelt documentation for the detailed explanation on how to use the tool.
-
-1. Change to the sample app's directory::
+Change to the sample app's directory and create a remote repository::
 
     $ cd ~/rails-sample-app
-
-1. Create a remote repository on Heroku::
-
     $ heroku create
 
+The command ``heroku create`` will creates a remote repository (called ``heroku``) which it configures in your local git repo. It also set a random name for your app: HEROKU_APP_NAME.
 
+Deploy the app::
+
+    $ git push heroku master
+
+Visit the app by typing::
+
+    $ heroku open
+
+Take a note of the remote repository name on Heroku. We will need this later for deploying the app from Shippable.

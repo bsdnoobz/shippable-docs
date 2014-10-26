@@ -22,5 +22,5 @@ In this guide, you will learn how to use Shippable for automated testing and the
 
 This tutorial assumes that you have:
 
-- A free `Shippable account <http://www.shippable.com>`.
-- A free `Heroku account <https://signup.heroku.com/signup/dc>`.
+- A free `Shippable account <http://www.shippable.com>`_.
+- A free `Heroku account <https://signup.heroku.com/signup/dc>`_.

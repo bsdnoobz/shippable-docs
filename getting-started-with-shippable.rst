@@ -7,14 +7,14 @@ Shippable is a SaaS platform that lets you easily add Continuous Integration/Dep
 
 Shippable uses **Build Minions** which is docker based containers to run your workloads. Docker is the fastest growing Linux container solution and this will light up some cool scenarios like portability and versioning in the coming weeks.
 
+Shippable supports many popular languages such as Ruby, Python, Node.js, and others. We also support services which are commonly used in your applications like MySQL, PostgreSQL, Elastic Search, and others.
+
 Common use cases for Shippable include:
 
 - Automating the packaging and deployment of web applications.
 - Automated testing and continuous integration/deployment.
 
 .. note:: Shippable is 100% free to use, even for private repositories.
-
-Shippable supports many popular languages such as Ruby, Python, Node.js, and others. We also support services which are commonly used in your applications like MySQL, PostgreSQL, Elastic Search, and others.
 
 In this guide, you will learn how to use Shippable for automated testing and then deploy your web application to Heroku if the tests are passed. We will be using Ruby on Rails app in this guide, but you can easily use this guide for other frameworks/languanges as well.
 

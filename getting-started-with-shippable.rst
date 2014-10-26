@@ -16,11 +16,11 @@ Common use cases for Shippable include:
 
 Shippable supports many popular languages such as Ruby, Python, Node.js, and others. We also support services which are commonly used in your applications like MySQL, PostgreSQL, Elastic Search, and others.
 
-About this guide
-----------------
 In this guide, you will learn how to use Shippable for automated testing and then deploy your web application to Heroku if the tests are passed. We will be using Ruby on Rails app in this guide, but you can easily use this guide for other frameworks/languanges as well.
 
 This tutorial assumes that you have:
 
+- A free `Github account <https:/github.com>`_.
 - A free `Shippable account <http://www.shippable.com>`_.
 - A free `Heroku account <https://signup.heroku.com/signup/dc>`_.
+- Ruby on Rails installed your system.

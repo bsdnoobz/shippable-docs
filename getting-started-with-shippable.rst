@@ -3,6 +3,7 @@ Getting Started with Shippable
 
 Introduction
 ------------
+
 Shippable is a SaaS platform that lets you easily add Continuous Integration/Deployment to your Github and BitButcket (git) repositories. It is lightweight, super simple to setup, and runs your builds and tests faster than any other service. After building and teting your code, you can deploy it to any PaaS provider like Heroku & OpenShift and also to VMs, bare metal, OpenStack clusters, or any major infrastructure provider.
 
 Shippable uses **Build Minions** which is docker based containers to run your workloads. Docker is the fastest growing Linux container solution and this will light up some cool scenarios like portability and versioning in the coming weeks.
@@ -27,19 +28,39 @@ This tutorial assumes that you have:
 
 Prepare your app
 ----------------
+
 We have created a sample `Ruby on Rails application <https://github.com/bsdnoobz/rails-sample-app>`_ on Github for this guide. First you need to `fork the sample code <https://help.github.com/articles/fork-a-repo/>`_ to your Github account and then create a clone to work locally on your computer.
 
 ::
 
-    git clone git@github.com:YOUR-USERNAME/rails-sample-app.git
+    $ git clone git@github.com:YOUR-USERNAME/rails-sample-app.git
+
+We will assume that the repository is in the ``~/rails-sample-app`` directory.
 
 The app is a simple Ruby on Rails project which was generated using the `rails generate scaffold` command. Before doing something with the app, take a look and play around with the app on your computer first. Run the following commands from your terminal:
 
 ::
 
-    cd rails-sample-app
-    bundle install --without production
-    rake db:migrate
-    rails server
+    $ cd ~/rails-sample-app
+    $ bundle install --without production
+    $ rake db:migrate
+    $ rails server
 
-Access the app by opening ``http://localhost:3000`` from your browser.
+Now you can access the app by opening ``http://localhost:3000`` from your browser.
+
+Create remote repository on Heroku
+----------------------------------
+
+In this step you will create a remote repository on Heroku (i.e. deploy the app).
+
+To deploy the app, you need to install `Heroku toolbelt <https://toolbelt.heroku.com/>`_. Refer to the Heroku Toolbelt documentation for the detailed explanation on how to use the tool.
+
+1. Change to the sample app's directory::
+
+    $ cd ~/rails-sample-app
+
+1. Create a remote repository on Heroku::
+
+    $ heroku create
+
+

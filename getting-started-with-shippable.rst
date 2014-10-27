@@ -180,12 +180,12 @@ To install Heroku toolbelt on your minion, obtain the API key from your `Heroku 
         - APP_NAME=fathomless-ocean-2995
         - secure: a+WO3TxxmI/lIt5abubetS/sBsREx/EKj6S4gGRAcXvP/XD0oBPIKVd+7bkvqiRkK4r+oGcUb28Ioj2/R2hq2U1Imdt3RRy3D7m9rK3I2On+OyCvqwJbYN2AMVKUm24s1MhMX4WUzkZJjFBNSHeDD0Q8h58Dgj/gskWDDxSz6maQloUTZT3WTrEvDh/G77rfVXpuJnk+XLloRxMRfuewDtmIAb9d+AwoPhYz3y1wsjowzQi5BAmLplc3hFaSf2TjiBd60bXdE1pkjQpkRrGOiE9DMIv/KPhaGXVQr7EGLg==
 
-Then, install the toolbelt in ``before_install`` section::
+Use ``before_install`` to install the toolbelt::
 
     before_install:
       - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh 
 
-Deploy your app when all of the test are passed in the ``after_success`` section::
+Use ``after_success`` to deploy your app when all of the tests are passed::
 
     after_success:
       - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku

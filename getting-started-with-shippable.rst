@@ -6,18 +6,18 @@ Introduction
 
 **Shippable** is a SaaS platform that lets you easily add Continuous Integration/Deployment to your Github and BitButcket (git) repositories. It is lightweight, super simple to setup, and runs your builds and tests faster than any other service. After building and teting your code, you can deploy it to any PaaS provider like Heroku & OpenShift and also to VMs, bare metal, OpenStack clusters, or any major infrastructure provider.
 
-**Shippable** uses **Build Minions** which is docker based containers to run your workloads. Docker is the fastest growing Linux container solution and this will light up some cool scenarios like portability and versioning in the coming weeks.
+Shippable uses **Build Minions** which is docker based containers to run your workloads. Docker is the fastest growing Linux container solution and this will light up some cool scenarios like portability and versioning in the coming weeks.
 
-**Shippable** supports many popular languages such as Ruby, Python, Node.js, and others. We also support services which are commonly used in your applications like MySQL, PostgreSQL, Elastic Search, and others.
+Shippable supports many popular languages such as Ruby, Python, Node.js, and others. We also support services which are commonly used in your applications like MySQL, PostgreSQL, Elastic Search, and others.
 
-Common use cases for **Shippable** include:
+Common use cases for Shippable include:
 
 - Automating the packaging and deployment of web applications.
 - Automated testing and continuous integration/deployment.
 
-.. note:: **Shippable** is 100% free to use, even for private repositories.
+.. note:: Shippable is 100% free to use, even for private repositories.
 
-In this guide, you will learn how to use **Shippable** for automated testing and then deploy your web application to Heroku if the tests are passed. We will be using Ruby on Rails app in this guide, but you can easily use this guide for other frameworks/languanges as well.
+In this guide, you will learn how to use Shippable for automated testing and then deploy your web application to Heroku if the tests are passed. We will be using Ruby on Rails app in this guide, but you can easily use this guide for other frameworks/languanges as well.
 
 This tutorial assumes that you have:
 
@@ -110,12 +110,12 @@ Run pending migrations on Heroku::
 
 Now you can visit your app by typing the app's URL from your browser.
 
-Take a note of the remote repository name on Heroku. We will need this later for deploying the app from **Shippable**.
+Take a note of the remote repository name on Heroku. We will need this later for deploying the app from Shippable.
 
 Attach your Github repository to Shippable
 ------------------------------------------
 
-In this step you will attach your sample app's Github repository to **Shippable**.
+In this step you will attach your sample app's Github repository to Shippable.
 
 Create a new file called ``shippable.yml`` in the root directory of your app with the following contents::
 
@@ -150,7 +150,7 @@ Add this file to the repository::
     $ git commit -m "added shippable.yml"
     $ git push origin master
 
-The file ``shippable.yml`` contains the configuration needed by **Shippable**. For more information about this file and the available options, refer to `Shippable Configuration File Reference <http://www.shippable.com>`_.
+The file ``shippable.yml`` contains the configuration needed by Shippable. For more information about this file and the available options, refer to `Shippable Configuration File Reference <http://www.shippable.com>`_.
 
 Open ``http://www.shippable.com`` and click the Github button to log in using your Github account. It will display your dashboard below.
 
@@ -158,10 +158,25 @@ Open ``http://www.shippable.com`` and click the Github button to log in using yo
 
 Click your Github name below "Organizations" on the right sidebar. Your dashboard will display the list of your Github repos and some other things. From this repo list, scroll down until you find your app and click the **Enable** button. Your app will be listed in the **Projects** table. Click your app's name in this table to open the **Project Builds** page.
 
-Manually run the build by clicking the arrow button on the top. It will ask what branch to build, select "master" and click **Run**. Please wait while **Shippable** builds your app.
+Run the build manually by clicking the arrow button on the top. It will ask what branch to build, select "master" and click **Run**. Please wait while it builds your app.
 
-When it finished, you should see that **Shippable** successfully build the app and all of the tests are passed.
+When it finished, you should see that Shippable successfully build the app and all of the tests are passed.
 
 .. image:: images/shippable-build-success.png
 
 On the bottom of the page, you can see the console log of your minion, as well as the test and code coverage visualization.
+
+Continuous deployment to Heroku
+-------------------------------
+
+In this step, you will deploy your app to Heroku when all of the tests are passed. We will use Heroku toolbelt in our build minion so we can execute Rake commands from our build (i.e. ``heroku run rake db:migrate``).
+
+To be able to push your code to Heroku, you need to add SSH public key associated with your Shippable account to the authorized keys in `Heroku Account Settings <https://dashboard.heroku.com/account>`_. From your Shippable dashboard, click your Github name under **Organizations** on the right sidebar and choose **Deployment Key**. Copy the contents of the key and add it in "SSH keys" section of Heroku settings.
+
+To use Heroku toolbelt, obtain the API key from your `Heroku account settings <https://dashboard.heroku.com/account>`_ and copy it from **API Key** section. Encrypt the key by clicking the **ENCRYPT ENV VARS** button on the top of the page. Type ``HEROKU_API_KEY=<your key here>`` in the text field and click **Encrypt**. Paste the encrypted secret in ``shippable.yml``::
+
+    env:
+        global:
+            - APP_NAME=fathomless-ocean-2995
+            - secure: a+WO3TxxmI/lIt5abubetS/sBsREx/EKj6S4gGRAcXvP/XD0oBPIKVd+7bkvqiRkK4r+oGcUb28Ioj2/R2hq2U1Imdt3RRy3D7m9rK3I2On+OyCvqwJbYN2AMVKUm24s1MhMX4WUzkZJjFBNSHeDD0Q8h58Dgj/gskWDDxSz6maQloUTZT3WTrEvDh/G77rfVXpuJnk+XLloRxMRfuewDtmIAb9d+AwoPhYz3y1wsjowzQi5BAmLplc3hFaSf2TjiBd60bXdE1pkjQpkRrGOiE9DMIv/KPhaGXVQr7EGLg==
+

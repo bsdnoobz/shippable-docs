@@ -173,7 +173,7 @@ In this step, you will deploy your app to Heroku when all of the tests are passe
 
 To be able to push your code to Heroku, you need to add SSH public key associated with your Shippable account to the authorized keys in `Heroku Account Settings <https://dashboard.heroku.com/account>`_. From your Shippable dashboard, click your Github name under **Organizations** on the right sidebar and choose **Deployment Key**. Copy the contents of the key and add it in "SSH keys" section of Heroku settings.
 
-To use Heroku toolbelt, obtain the API key from your `Heroku account settings <https://dashboard.heroku.com/account>`_ and copy it from **API Key** section. Encrypt the key by clicking the **ENCRYPT ENV VARS** button on the top of the page. Type ``HEROKU_API_KEY=<your key here>`` in the text field and click **Encrypt**. Paste the encrypted secret in ``shippable.yml``::
+To install Heroku toolbelt on your minion, obtain the API key from your `Heroku account settings <https://dashboard.heroku.com/account>`_ and copy it from **API Key** section. Encrypt the key before placing it in ``shippable.yml`` by clicking the **ENCRYPT ENV VARS** button on the top of the page. Type ``HEROKU_API_KEY=<your key here>`` in the text field and click **Encrypt**. Paste the encrypted secret in ``shippable.yml``::
 
     env:
       global:

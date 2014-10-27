@@ -244,5 +244,7 @@ Notice in the **Project Builds** page of your app, Shippable automatically build
 
 .. note:: If your build times out during ``after_success`` step, please double check that you correctly defined ``HEROKU_API_KEY`` variable. If no or invalid key is supplied, Heroku toolbelt will switch to an interactive mode, prompting for the username and causing the build to ‘hang’.
 
-Develop you app
----------------
+Conclusion
+----------
+
+In this guide, we have learned how to prepare your project for Shippable and use Shippable for automated integration/deployment tool. Up to this point, now you can develop your app and Shippable will automatically build your app. If everything is ok and all of the tests are passed, your app will be deployed automatically to Heroku.

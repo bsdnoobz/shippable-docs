@@ -176,7 +176,73 @@ To be able to push your code to Heroku, you need to add SSH public key associate
 To use Heroku toolbelt, obtain the API key from your `Heroku account settings <https://dashboard.heroku.com/account>`_ and copy it from **API Key** section. Encrypt the key by clicking the **ENCRYPT ENV VARS** button on the top of the page. Type ``HEROKU_API_KEY=<your key here>`` in the text field and click **Encrypt**. Paste the encrypted secret in ``shippable.yml``::
 
     env:
-        global:
-            - APP_NAME=fathomless-ocean-2995
-            - secure: a+WO3TxxmI/lIt5abubetS/sBsREx/EKj6S4gGRAcXvP/XD0oBPIKVd+7bkvqiRkK4r+oGcUb28Ioj2/R2hq2U1Imdt3RRy3D7m9rK3I2On+OyCvqwJbYN2AMVKUm24s1MhMX4WUzkZJjFBNSHeDD0Q8h58Dgj/gskWDDxSz6maQloUTZT3WTrEvDh/G77rfVXpuJnk+XLloRxMRfuewDtmIAb9d+AwoPhYz3y1wsjowzQi5BAmLplc3hFaSf2TjiBd60bXdE1pkjQpkRrGOiE9DMIv/KPhaGXVQr7EGLg==
+      global:
+        - APP_NAME=fathomless-ocean-2995
+        - secure: a+WO3TxxmI/lIt5abubetS/sBsREx/EKj6S4gGRAcXvP/XD0oBPIKVd+7bkvqiRkK4r+oGcUb28Ioj2/R2hq2U1Imdt3RRy3D7m9rK3I2On+OyCvqwJbYN2AMVKUm24s1MhMX4WUzkZJjFBNSHeDD0Q8h58Dgj/gskWDDxSz6maQloUTZT3WTrEvDh/G77rfVXpuJnk+XLloRxMRfuewDtmIAb9d+AwoPhYz3y1wsjowzQi5BAmLplc3hFaSf2TjiBd60bXdE1pkjQpkRrGOiE9DMIv/KPhaGXVQr7EGLg==
 
+Then, install the toolbelt in ``before_install`` section::
+
+    before_install:
+      - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh 
+
+Deploy your app when all of the test are passed in the ``after_success`` section::
+
+    after_success:
+      - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku
+      - git remote -v | grep ^heroku || heroku git:remote --app $APP_NAME
+      - git push -f heroku master
+      - heroku run rake db:migrate
+
+Now your ``shippable.yml`` should look like this::
+
+    # The operating system for our build minion
+    build_environment: Ubuntu 12.04
+
+    # The programming language being used
+    language: ruby
+
+    # Use RVM and Ruby 2.1.2
+    rvm:
+      - 2.1.2
+
+    # Set the environment variables
+    env:
+      global:
+        - APP_NAME=fathomless-ocean-2995
+        - CI_REPORTS=shippable/testresults COVERAGE_REPORTS=shippable/codecoverage
+        - secure: a+WO3TxxmI/lIt5abubetS/sBsREx/EKj6S4gGRAcXvP/XD0oBPIKVd+7bkvqiRkK4r+oGcUb28Ioj2/R2hq2U1Imdt3RRy3D7m9rK3I2On+OyCvqwJbYN2AMVKUm24s1MhMX4WUzkZJjFBNSHeDD0Q8h58Dgj/gskWDDxSz6maQloUTZT3WTrEvDh/G77rfVXpuJnk+XLloRxMRfuewDtmIAb9d+AwoPhYz3y1wsjowzQi5BAmLplc3hFaSf2TjiBd60bXdE1pkjQpkRrGOiE9DMIv/KPhaGXVQr7EGLg==
+
+    # Prepare our build minion: install heroku toolbelt
+    before_install:
+      - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh 
+
+    # Prepare the things needed before executing the unit tests
+    before_script:
+      - bundle install
+      - mkdir -p shippable/testresults
+      - mkdir -p shippable/codecoverage
+      - rake db:migrate
+
+    # The command for executing the unit test
+    script:
+      - rake test
+
+    # Deploy the app to Heroku when build is success
+    after_success:
+      - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku
+      - git remote -v | grep ^heroku || heroku git:remote --app $APP_NAME
+      - git push -f heroku master
+      - heroku run rake db:migrate
+
+Commit your changes::
+
+    $ git add .
+    $ git commit -m "modify shippable.yml to deploy app"
+    $ git push origin master
+
+Notice in the **Project Builds** page of your app, Shippable automatically builds your app when it detects changes in your code. If everything is ok, your new app will be available on Heroku when the build succeeded.
+
+.. note:: If your build times out during ``after_success`` step, please double check that you correctly defined ``HEROKU_API_KEY`` variable. If no or invalid key is supplied, Heroku toolbelt will switch to an interactive mode, prompting for the username and causing the build to ‘hang’.
+
+Develop you app
+---------------
